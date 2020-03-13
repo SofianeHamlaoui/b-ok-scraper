@@ -8,7 +8,7 @@ A b-ok.cc Simple Python Scrapper
 - python3
 - selenium
 - BeautifulSoup
--re
+- re
 -Happiness :D 
 
 ```
