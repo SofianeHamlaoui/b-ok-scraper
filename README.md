@@ -1,7 +1,7 @@
 # b-ok-scrapper
 A b-ok.cc Simple Python Scrapper
 
-## First time using selenium, BeautifulSoup and first time experiencing scrappers :D 
+## First time using BeautifulSoup and first time experiencing scrappers :D 
 
 # Requirments :
 ```
