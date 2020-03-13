@@ -9,7 +9,7 @@ A b-ok.cc Simple Python Scrapper
 - selenium
 - BeautifulSoup
 - re
--Happiness :D 
+- Happiness :D 
 
 ```
 # Screenshot :
