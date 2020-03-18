@@ -1,7 +1,7 @@
 # b-ok-scrapper
-A b-ok.cc Simple Python Scrapper
+A b-ok.cc Simple Python Scraper
 
-## First time using BeautifulSoap and first time experiencing scrappers :D 
+## First time using BeautifulSoap and first time experiencing scrapers :D 
 
 # Requirments :
 ```
