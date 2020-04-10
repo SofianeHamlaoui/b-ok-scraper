@@ -77,3 +77,21 @@ def search():
             books.append((title,dirlinko,format_file))
             print("====================")
     download()
+
+try:
+    search()
+except (KeyboardInterrupt):
+    ans = input("""           
+    
+                \n\033[91m                  -[!]- SIGINT or CTRL-C detected.\033[0m \033[1;33m 
+
+        1) Leave 
+        2) Chose a book to download
+        
+        Choice : \033[0m""")
+    if ans == "1":
+        sys.exit()
+    elif ans == "2":
+        download()
+    else:
+        download()
