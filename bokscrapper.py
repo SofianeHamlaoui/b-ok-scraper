@@ -9,8 +9,22 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen, urlretrieve
 
 # Setting headers
-headers = requests.utils.default_headers()
-headers.update({ 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})
+headers = ['User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0']
+books = []
+download_path = "/home/sofiane/Downloads/BOOOKZ/"
+
+def logo():
+    os.system('clear')
+    print("""\033[0;31m
+  ______  _ _ _       _                 _       _____                                
+ |___  / | (_) |     | |               | |     / ____|                               
+    / /  | |_| |__   | |__   ___   ___ | | __ | (___   ___ _ __ __ _ _ __   ___ _ __ 
+   / /   | | | '_ \  | '_ \ / _ \ / _ \| |/ /  \___ \ / __| '__/ _` | '_ \ / _ \ '__|
+  / /__  | | | |_) | | |_) | (_) | (_) |   <   ____) | (__| | | (_| | |_) |  __/ |   
+ /_____| |_|_|_.__/  |_.__/ \___/ \___/|_|\_\ |_____/ \___|_|  \__,_| .__/ \___|_|   
+                                                                     | |              
+                                        \033[1;33mSofiane Hamlaoui © 2020\033[0m\033[0;31m      |_|
+                                                                    \033[0m""")
 
 def search():
     logo()
