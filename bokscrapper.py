@@ -48,20 +48,32 @@ def search():
     total = soup.find(class_="totalCounter")
     for nb in total.descendants:
         nbx = nb.replace("(", "").replace(")", "")
-    print("\n\033[1;33mThere Are " + nbx + " Books about " + q + " :\033[0m\n")
-for tr in soup.find_all('td'):
-    for td in tr.find_all('h3'):
-        for ts in td.find_all('a'):
-            title = ts.get_text()
-        for ts in td.find_all('a', attrs={'href': re.compile("^/book/")}):
-            ref = (ts.get('href'))
-            link = "https://b-ok.cc" + ref
-        print("\033[0;32m" + title + "\033[0m : \n")
-        print("\033[0;36mBook link : \033[0m " + link)
-        reqdir = requests.get(link, headers)
-        soup = BeautifulSoup(reqdir.content, 'html.parser')
-        for dirlink in soup.findAll('a', attrs={'href': re.compile("^/dl/")}):
-            linko = (dirlink.get('href'))
-            dirlinko = "https://b-ok.cc" + linko
-        print("\033[0;31mDirect Book link : \033[0m " + dirlinko)
-        print("====================")
+        print("\n\033[1;33mThere Are " + nbx + " Books about : \033[0;32m" + q + "\033[0m\n")
+        if nbx == "0":
+            input("\n\033[0;34mPress Enter to continue .....\033[0m")
+            search()
+    for tr in soup.find_all('td'):
+        for td in tr.find_all('h3'):
+            for ts in td.find_all('a'):
+                title = ts.get_text()
+            for ts in td.find_all('a', attrs={'href': re.compile("^/book/")}):
+                ref = (ts.get('href'))
+                link = "https://b-ok.cc" + ref
+            print("\033[0;32m" + title + "\033[0m : \n")
+            print("\033[0;33mBook link : \033[0;36m" + link+"\033[0m")
+            req = Request(link)
+            reqdir = urlopen(req).read()
+            req.add_header(headers[0],headers[1])
+
+            soup = BeautifulSoup(reqdir, 'html.parser')
+            for dirlink in soup.findAll('a', attrs={'href': re.compile("^/dl/")}):
+                linko = (dirlink.get('href'))
+                dirlinko = "https://b-ok.cc" + linko
+            print("\033[0;31mDirect Book link : \033[0;36m" + dirlinko+"\033[0m")
+            format_file = str((dirlink.get_text()).split(",")[0]).split("(")[1]
+            if len(format_file) == 0:
+                format_file = "pdf"
+            print("\033[1;33mBook Format : " +format_file.upper()+"\033[0m")
+            books.append((title,dirlinko,format_file))
+            print("====================")
+    download()
