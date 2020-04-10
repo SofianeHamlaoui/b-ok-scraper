@@ -13,6 +13,7 @@ headers = ['User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) 
 books = []
 download_path = "/home/sofiane/Downloads/BOOOKZ/"
 
+
 def logo():
     os.system('clear')
     print("""\033[0;31m
@@ -25,6 +26,16 @@ def logo():
                                                                      | |              
                                         \033[1;33mSofiane Hamlaoui © 2020\033[0m\033[0;31m      |_|
                                                                     \033[0m""")
+
+def download():
+    q = input("\n\033[0;35mWhich one do you want to download ? (direct Book link) : \033[0m")
+    for book in books:
+        if book[1] == q:
+            urlretrieve(q, f'{download_path}/{book[0]}.{book[2]}')
+            print("\033[0;32m-[✓]- Book Downloaded -[✓]-\033[0m")
+            return
+    print("\n\033[91m -[X]- Wrong url -[X]- \033[0m")
+    download()
 
 def search():
     logo()
