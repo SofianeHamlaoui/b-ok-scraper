@@ -1,9 +1,12 @@
 # Sofiane Hamlaoui
 # Bismillah <3
 
+import os
 import requests
 import re
+import sys
 from bs4 import BeautifulSoup
+from urllib.request import Request, urlopen, urlretrieve
 
 # Setting headers
 headers = requests.utils.default_headers()
