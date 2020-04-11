@@ -5,13 +5,19 @@ import os
 import requests
 import re
 import sys
+from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen, urlretrieve
 
 # Setting headers
 headers = ['User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0']
+ua = UserAgent()
+
+def rotate_agent():
+    return ua.random
 books = []
 download_path = "/home/sofiane/Downloads/BOOOKZ/"
+
 
 
 def logo():
