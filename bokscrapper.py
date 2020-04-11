@@ -18,7 +18,15 @@ def rotate_agent():
 books = []
 download_path = "/home/sofiane/Downloads/BOOOKZ/"
 
-
+def getProxies():
+    Req = requests.get('https://www.sslproxies.org/',
+                       headers={'User-Agent': rotate_agent()})
+    bs = BeautifulSoup(Req.content, features="html.parser")
+    Proxies = []
+    for row in bs.tbody.find_all('tr'):
+        cols = row.find_all('td')
+        Proxies.append({'IP': cols[0].text, 'Port': cols[1].text})
+    return Proxies
 
 def logo():
     os.system('clear')
