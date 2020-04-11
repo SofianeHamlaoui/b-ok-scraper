@@ -47,16 +47,24 @@ def download():
     Proxies = getProxies()
     for book in books:
         if book[1] == q:
-            file = requests.get(q)
+            for k in range(50):
+                i += 1
+                ip = Proxies[k]['IP']
+                port = Proxies[k]['Port']
+                proxiz ={'http': 'http://'+ip+':'+port}
+                #file = requests.get(q)
             ############################################TEST
-            Req = requests.get('http://icanhazip.com/', headers={
-                            'User-Agent': rotate_agent()}, proxies=prox, timeout=5)
-            myip = re.sub(r'[^0-9^\.:]', '', str(Req.content))
-            print(myip)
+                try:
+                    Req = requests.get('http://icanhazip.com/', headers={
+                                    'User-Agent': rotate_agent()}, proxies=proxiz, timeout=5)
+                    myip = re.sub(r'[^0-9^\.:]', '', str(Req.content))
+                    print(myip)
+                except requests.exceptions.RequestException as e:
+                    i += 1
             #############################################################################
-            open(download_path+'/'+book[0]+'.'+book[2], 'wb').write(file.content)
-            print("\033[0;32m-[✓]- Book Downloaded -[✓]-\033[0m")
-            return
+            #open(download_path+'/'+book[0]+'.'+book[2], 'wb').write(file.content)
+            #print("\033[0;32m-[✓]- Book Downloaded -[✓]-\033[0m")
+            #return
     print("\n\033[91m -[X]- Wrong url -[X]- \033[0m")
     download()
 
