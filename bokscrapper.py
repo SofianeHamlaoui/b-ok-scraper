@@ -43,6 +43,8 @@ def logo():
 
 def download():
     q = input("\n\033[0;35mWhich one do you want to download ? (direct Book link) : \033[0m")
+    i = 0
+    Proxies = getProxies()
     for book in books:
         if book[1] == q:
             file = requests.get(q)
