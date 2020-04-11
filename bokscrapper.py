@@ -31,7 +31,14 @@ def download():
     q = input("\n\033[0;35mWhich one do you want to download ? (direct Book link) : \033[0m")
     for book in books:
         if book[1] == q:
-            urlretrieve(q, f'{download_path}/{book[0]}.{book[2]}')
+            file = requests.get(q)
+            ############################################TEST
+            Req = requests.get('http://icanhazip.com/', headers={
+                            'User-Agent': rotate_agent()}, proxies=prox, timeout=5)
+            myip = re.sub(r'[^0-9^\.:]', '', str(Req.content))
+            print(myip)
+            #############################################################################
+            open(download_path+'/'+book[0]+'.'+book[2], 'wb').write(file.content)
             print("\033[0;32m-[✓]- Book Downloaded -[✓]-\033[0m")
             return
     print("\n\033[91m -[X]- Wrong url -[X]- \033[0m")
