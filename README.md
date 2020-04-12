@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="700" height="200"src="https://i.imgur.com/Yx378Gl.jpg">
+  <img width="700" height="200"src="static/logo.jpg">
   <h1 align="center">b-ok-scraper</h1>
   <h2 align="center">A b-ok.cc Simple Python Scraper</h2>
 </p>
