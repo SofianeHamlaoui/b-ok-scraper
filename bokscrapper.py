@@ -5,28 +5,13 @@ import os
 import requests
 import re
 import sys
-from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen, urlretrieve
 
 # Setting headers
 headers = ['User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0']
-ua = UserAgent()
-
-def rotate_agent():
-    return ua.random
 books = []
 download_path = "/home/sofiane/Downloads/BOOOKZ/"
-
-def getProxies():
-    Req = requests.get('https://www.sslproxies.org/',
-                       headers={'User-Agent': rotate_agent()})
-    bs = BeautifulSoup(Req.content, features="html.parser")
-    Proxies = []
-    for row in bs.tbody.find_all('tr'):
-        cols = row.find_all('td')
-        Proxies.append({'IP': cols[0].text, 'Port': cols[1].text})
-    return Proxies
 
 def logo():
     os.system('clear')
@@ -43,28 +28,11 @@ def logo():
 
 def download():
     q = input("\n\033[0;35mWhich one do you want to download ? (direct Book link) : \033[0m")
-    i = 0
-    Proxies = getProxies()
     for book in books:
         if book[1] == q:
-            for k in range(50):
-                i += 1
-                ip = Proxies[k]['IP']
-                port = Proxies[k]['Port']
-                proxiz ={'http': 'http://'+ip+':'+port}
-                #file = requests.get(q)
-            ############################################TEST
-                try:
-                    Req = requests.get('http://icanhazip.com/', headers={
-                                    'User-Agent': rotate_agent()}, proxies=proxiz, timeout=5)
-                    myip = re.sub(r'[^0-9^\.:]', '', str(Req.content))
-                    print(myip)
-                except requests.exceptions.RequestException as e:
-                    i += 1
-            #############################################################################
-            #open(download_path+'/'+book[0]+'.'+book[2], 'wb').write(file.content)
-            #print("\033[0;32m-[✓]- Book Downloaded -[✓]-\033[0m")
-            #return
+            urlretrieve(q, f'{download_path}/{book[0]}.{book[2]}')
+            print("\033[0;32m-[✓]- Book Downloaded -[✓]-\033[0m")
+            return
     print("\n\033[91m -[X]- Wrong url -[X]- \033[0m")
     download()
 
