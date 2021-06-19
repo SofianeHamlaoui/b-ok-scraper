@@ -11,7 +11,7 @@ from urllib.request import Request, urlopen, urlretrieve
 # Setting headers
 headers = ['User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0']
 books = []
-download_path = ""
+download_path = "."
 
 def logo():
     os.system('clear')
