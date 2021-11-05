@@ -11,7 +11,7 @@ from urllib.request import Request, urlopen, urlretrieve
 # Setting headers
 headers = ['User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0']
 books = []
-download_path = "/home/sofiane/Downloads/BOOOKZ/"
+download_path = "."
 
 def logo():
     os.system('clear')
@@ -38,8 +38,9 @@ def download():
 
 def search():
     logo()
-    q = input("\033[0;35mWhat Are you looking for ? : \033[0m")
-    url = "https://b-ok.cc/s/" + q
+    book = str(input("\033[0;35m What book you looking for ? : \033[0m")).replace(" ","-")
+    author = str(input("\033[0;35m Book author (Leave Blank if don't know)? : \033[0m")).replace(" ","-")
+    url = "https://b-ok.asia/s/" +book + author
     req = Request(url)
     req.add_header(headers[0],headers[1]) 
     content = urlopen(req).read()
@@ -47,7 +48,7 @@ def search():
     total = soup.find(class_="totalCounter")
     for nb in total.descendants:
         nbx = nb.replace("(", "").replace(")", "")
-        print("\n\033[1;33mThere Are " + nbx + " Books about : \033[0;32m" + q + "\033[0m\n")
+        print("\n\033[1;33mThere Are " + nbx + " Books about : \033[0;32m" + book + "\033[0m\n")
         if nbx == "0":
             input("\n\033[0;34mPress Enter to continue .....\033[0m")
             search()
@@ -57,7 +58,7 @@ def search():
                 title = ts.get_text()
             for ts in td.find_all('a', attrs={'href': re.compile("^/book/")}):
                 ref = (ts.get('href'))
-                link = "https://b-ok.cc" + ref
+                link = "https://b-ok.asia" + ref
             print("\033[0;32m" + title + "\033[0m : \n")
             print("\033[0;33mBook link : \033[0;36m" + link+"\033[0m")
             req = Request(link)
@@ -69,7 +70,10 @@ def search():
                 linko = (dirlink.get('href'))
                 dirlinko = "https://b-ok.cc" + linko
             print("\033[0;31mDirect Book link : \033[0;36m" + dirlinko+"\033[0m")
-            format_file = str((dirlink.get_text()).split(",")[0]).split("(")[1]
+            try:
+                format_file = str((dirlink.get_text()).split(",")[0]).split("(")[1]
+            except IndexError:
+                format_file=""
             if len(format_file) == 0:
                 format_file = "pdf"
             print("\033[1;33mBook Format : " +format_file.upper()+"\033[0m")
